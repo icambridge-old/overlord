@@ -1,0 +1,25 @@
+@(servers: Array[org.jclouds.compute.domain.internal.NodeMetadataImpl])
+
+@main("Welcome to Overlord!") {
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @servers.map { server =>
+    <tr>
+        <td>@server.getId</td>
+        <td>@server.getName</td>
+        <td>@server.getStatus</td>
+    </tr>
+
+    }
+    </tbody>
+</table>
+
+}
