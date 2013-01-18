@@ -3,24 +3,18 @@ package controllers
 import play.api._
 import play.api.mvc._
 
-import com.google.common.io.Closeables.closeQuietly
-
-import java.io.Closeable
-import java.util.Set
-
-import org.jclouds.ContextBuilder
-import org.jclouds.compute.ComputeService
-import org.jclouds.compute.ComputeServiceContext
-import org.jclouds.compute.domain.ComputeMetadata
-import org.jclouds.compute.domain.NodeMetadata
-import org.jclouds.compute.predicates.NodePredicates
-import org.jclouds.util.Preconditions2
-import org.jclouds.compute.domain.internal.NodeMetadataImpl
-import org.jclouds.compute.domain.NodeMetadata
+import util.Compute
 
 object Image extends Controller {
 
-  def index = TODO
+  def index = Action { implicit Request =>
+
+     val client = Compute.getClient
+     val images = client.listImages.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Image])
+     val flashMessage = flash.get("success").getOrElse("")
+
+     Ok(views.html.image.index(images, flashMessage))
+  }
 
   def view(imageId: String) = TODO
 

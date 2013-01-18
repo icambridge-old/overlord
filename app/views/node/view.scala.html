@@ -1,22 +1,28 @@
-@(node: org.jclouds.compute.domain.NodeMetadata)
+@(node: org.jclouds.compute.domain.NodeMetadata, flashMessage: String)
 
 @main("View Node") {
-      @paritals.nodeMenu(node, "view")
+    @paritals.nodeMenu(node, "view")
 
-      <dl class="dl-horizontal">
-          <dt>Node ID</dt>
-          <dd>@node.getId</dd>
-          <dt>Node Name</dt>
-          <dd>@node.getName</dd>
-          <dt>Node Public IPs</dt>
-          <dd>@node.getPublicAddresses</dd>
-          <dt>Node Private IPs</dt>
-          <dd>@node.getPrivateAddresses</dd>
-          <dt>Node Status</dt>
-          <dd>@node.getStatus</dd>
-          <dt>Node Location</dt>
-          <dd>@node.getLocation.getParent.getDescription</dd>
-          <dt>Node Type</dt>
-          <dd>@node.getHardware.getName</dd>
-      </dl>
+    @if(flashMessage != "") {
+        <div class="alert alert-success">
+          @flashMessage
+        </div>
+    }
+
+    <dl class="dl-horizontal">
+        <dt>Node ID</dt>
+        <dd>@node.getId</dd>
+        <dt>Node Name</dt>
+        <dd>@node.getName</dd>
+        <dt>Node Public IPs</dt>
+        <dd>@node.getPublicAddresses</dd>
+        <dt>Node Private IPs</dt>
+        <dd>@node.getPrivateAddresses</dd>
+        <dt>Node Status</dt>
+        <dd>@node.getStatus</dd>
+        <dt>Node Location</dt>
+        <dd>@node.getLocation.getParent.getDescription</dd>
+        <dt>Node Type</dt>
+        <dd>@node.getHardware.getName</dd>
+    </dl>
 }

@@ -13,20 +13,22 @@ object Node extends Controller {
   def index = Action { implicit request =>
 
     val client = Compute.getClient
+
     val servers: Array[NodeMetadataImpl]  = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
     val flashMessage = flash.get("success").getOrElse("")
 
     Ok(views.html.node.index(servers, flashMessage))
   }
 
-  def view(nodeId: String) = Action {
+  def view(nodeId: String) = Action {  implicit request =>
 
 
     val client = Compute.getClient
     val node: NodeMetadata  = client.getNodeMetadata(nodeId)
 
+    val flashMessage = flash.get("success").getOrElse("")
 
-    Ok(views.html.node.view(node))
+    Ok(views.html.node.view(node, flashMessage))
   }
 
   def create = TODO
@@ -35,7 +37,7 @@ object Node extends Controller {
 
   def recreate(nodeId: String) = TODO
 
-  def delete(nodeId: String) = Action {
+  def delete(nodeId: String) = Action { implicit request =>
 
     val client = Compute.getClient
     val node: NodeMetadata  = client.getNodeMetadata(nodeId)
@@ -53,10 +55,27 @@ object Node extends Controller {
 
   }
 
-  def reboot(nodeId: String) = TODO
+  def reboot(nodeId: String) = Action {  implicit request =>
+
+    val client = Compute.getClient
+    val node: NodeMetadata  = client.getNodeMetadata(nodeId)
+
+    Ok(views.html.node.reboot(node))
+
+  }
+
+  def rebootConfirm(nodeId: String) = Action { implicit request =>
+
+    val client = Compute.getClient
+    client.rebootNode(nodeId)
+
+    Redirect(routes.Node.view(nodeId)).flashing("success" -> "The node was successfully rebooted")
+
+  }
+
+  // Need to figure out Admin Actions extension for these two.
+  def resume(nodeId: String) = TODO
 
   def suspend(nodeId: String) = TODO
-
-  def resume(nodeId: String) = TODO
 
 }

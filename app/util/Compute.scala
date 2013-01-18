@@ -14,6 +14,7 @@ import org.jclouds.compute.domain.NodeMetadata
 import org.jclouds.compute.predicates.NodePredicates
 import org.jclouds.util.Preconditions2
 import org.jclouds.compute.domain.internal.NodeMetadataImpl
+import org.jclouds.openstack.nova.v2_0.extensions._
 import play.api.Play
 
 object Compute {
@@ -27,7 +28,6 @@ object Compute {
       .credentials(username, apiKey)
       .buildView(classOf[ComputeServiceContext])
     val compute = context.getComputeService()
-
     compute
   }
 

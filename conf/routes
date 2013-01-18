@@ -11,6 +11,7 @@ GET     /node/delete/:nodeId                        controllers.Node.delete(node
 POST    /node/delete/:nodeId/confirm                controllers.Node.deleteConfirm(nodeId)
 GET     /node/suspend/:nodeId                       controllers.Node.suspend(nodeId)
 GET     /node/reboot/:nodeId                        controllers.Node.reboot(nodeId)
+POST    /node/reboot/:nodeId/confirm                controllers.Node.rebootConfirm(nodeId)
 GET     /node/resume/:nodeId                        controllers.Node.resume(nodeId)
 GET     /node/recreate/:nodeId                      controllers.Node.recreate(nodeId)
 GET     /node/create                                controllers.Node.create
