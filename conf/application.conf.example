@@ -48,3 +48,4 @@ logger.application=DEBUG
 # Rackspace api details
 rackspace.username=""
 rackspace.apikey=""
+rackspace.driver = "rackspace-cloudservers-uk"
