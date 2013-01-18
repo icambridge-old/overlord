@@ -2,9 +2,20 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# nodes
 GET     /                           controllers.Node.index
+#GET     /node                       controllers.Node.index
 GET     /node/view/:nodeId          controllers.Node.view(nodeId)
+GET     /node/edit/:nodeId          controllers.Node.edit(nodeId)
+GET     /node/recreate/:nodeId         controllers.Node.recreate(nodeId)
+GET     /node/create                controllers.Node.create
+
+GET     /loadbalancer                               controllers.Loadbalancer.index
+GET     /loadbalancer/view/:loadBalancerId          controllers.Loadbalancer.view(loadBalancerId)
+GET     /loadbalancer/edit/:loadBalancerId          controllers.Loadbalancer.edit(loadBalancerId)
+GET     /loadbalancer/recreate/:loadBalancerId         controllers.Loadbalancer.recreate(loadBalancerId)
+GET     /loadbalancer/create                        controllers.Loadbalancer.create
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

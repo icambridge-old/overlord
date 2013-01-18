@@ -52,4 +52,10 @@ object Node extends Controller {
     Ok(views.html.node.view(node))
   }
 
+  def create = TODO
+
+  def edit(nodeId: String) = TODO
+
+  def recreate(nodeId: String) = TODO
+
 }
