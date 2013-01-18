@@ -3,16 +3,17 @@
 # ~~~~
 
 # Nodes
-GET     /                           controllers.Node.index
-#GET     /node                      controllers.Node.index
-GET     /node/view/:nodeId          controllers.Node.view(nodeId)
-GET     /node/edit/:nodeId          controllers.Node.edit(nodeId)
-GET     /node/delete/:nodeId        controllers.Node.delete(nodeId)
-GET     /node/suspend/:nodeId       controllers.Node.suspend(nodeId)
-GET     /node/reboot/:nodeId        controllers.Node.reboot(nodeId)
-GET     /node/resume/:nodeId        controllers.Node.resume(nodeId)
-GET     /node/recreate/:nodeId      controllers.Node.recreate(nodeId)
-GET     /node/create                controllers.Node.create
+GET     /                                           controllers.Node.index
+#GET     /node                                      controllers.Node.index
+GET     /node/view/:nodeId                          controllers.Node.view(nodeId)
+GET     /node/edit/:nodeId                          controllers.Node.edit(nodeId)
+GET     /node/delete/:nodeId                        controllers.Node.delete(nodeId)
+POST    /node/delete/:nodeId/confirm                controllers.Node.deleteConfirm(nodeId)
+GET     /node/suspend/:nodeId                       controllers.Node.suspend(nodeId)
+GET     /node/reboot/:nodeId                        controllers.Node.reboot(nodeId)
+GET     /node/resume/:nodeId                        controllers.Node.resume(nodeId)
+GET     /node/recreate/:nodeId                      controllers.Node.recreate(nodeId)
+GET     /node/create                                controllers.Node.create
 
 # Load Balancer
 GET     /loadbalancer                               controllers.Loadbalancer.index

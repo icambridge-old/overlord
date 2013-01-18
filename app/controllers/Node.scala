@@ -10,13 +10,13 @@ import util.Compute
 
 object Node extends Controller {
 
-  def index = Action {
+  def index = Action { implicit request =>
 
     val client = Compute.getClient
     val servers: Array[NodeMetadataImpl]  = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
+    val flashMessage = flash.get("success").getOrElse("")
 
-
-    Ok(views.html.node.index(servers))
+    Ok(views.html.node.index(servers, flashMessage))
   }
 
   def view(nodeId: String) = Action {
@@ -35,7 +35,23 @@ object Node extends Controller {
 
   def recreate(nodeId: String) = TODO
 
-  def delete(nodeId: String) = TODO
+  def delete(nodeId: String) = Action {
+
+    val client = Compute.getClient
+    val node: NodeMetadata  = client.getNodeMetadata(nodeId)
+
+    Ok(views.html.node.delete(node))
+
+  }
+
+  def deleteConfirm(nodeId: String) = Action { implicit request =>
+
+    val client = Compute.getClient
+    client.destroyNode(nodeId)
+
+    Redirect(routes.Node.index).flashing("success" -> "The node was successfully deleted")
+
+  }
 
   def reboot(nodeId: String) = TODO
 

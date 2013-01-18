@@ -1,0 +1,10 @@
+@(node: org.jclouds.compute.domain.NodeMetadata, pageType: String)
+
+<ul class="nav nav-tabs">
+    <li @if(pageType=="view") { class="active"}><a href="@routes.Node.view(helper.urlEncode(node.getId))">View</a></li>
+    <li @if(pageType=="edit") { class="active"}><a href="@routes.Node.edit(helper.urlEncode(node.getId))">Edit</a></li>
+    <li @if(pageType=="delete") { class="active"}><a href="@routes.Node.delete(helper.urlEncode(node.getId))">Delete</a></li>
+    <li @if(pageType=="reboot") { class="active"}><a href="@routes.Node.reboot(helper.urlEncode(node.getId))">Reboot</a></li>
+    <li @if(pageType=="suspend") { class="active"}><a href="@routes.Node.suspend(helper.urlEncode(node.getId))">Suspend</a></li>
+    <li @if(pageType=="resume") { class="active"}><a href="@routes.Node.resume(helper.urlEncode(node.getId))">Resume</a></li>
+</ul>

@@ -1,25 +1,32 @@
-@(servers: Array[org.jclouds.compute.domain.internal.NodeMetadataImpl])
+@(servers: Array[org.jclouds.compute.domain.internal.NodeMetadataImpl], flashMessage: String)
 
 @main("Welcome to Overlord!") {
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
 
-    @servers.map { server =>
-    <tr>
-        <td><a href="@routes.Node.view(helper.urlEncode(server.getId))">@server.getId</a></td>
-        <td>@server.getName</td>
-        <td>@server.getStatus</td>
-    </tr>
-
+    @if(flashMessage != "") {
+        <div class="alert alert-success">
+            @flashMessage
+        </div>
     }
-    </tbody>
-</table>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @servers.map { server =>
+        <tr>
+            <td><a href="@routes.Node.view(helper.urlEncode(server.getId))">@server.getId</a></td>
+            <td>@server.getName</td>
+            <td>@server.getStatus</td>
+        </tr>
+
+        }
+        </tbody>
+    </table>
 
 }

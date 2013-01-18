@@ -1,7 +1,9 @@
 @(node: org.jclouds.compute.domain.NodeMetadata)
 
-@main("Welcome to Overlord!") {
-      <dl>
+@main("View Node") {
+      @paritals.nodeMenu(node, "view")
+
+      <dl class="dl-horizontal">
           <dt>Node ID</dt>
           <dd>@node.getId</dd>
           <dt>Node Name</dt>
