@@ -1,0 +1,14 @@
+@(node: org.jclouds.compute.domain.NodeMetadata)
+
+@main("Welcome to Overlord!") {
+      <dl>
+          <dt>Node ID</dt>
+          <dd>@node.getId</dd>
+          <dt>Node Name</dt>
+          <dd>@node.getName</dd>
+          <dt>Node IP</dt>
+          <dd>@node.getPublicAddresses</dd>
+          <dt>Node Status</dt>
+          <dd>@node.getStatus</dd>
+      </dl>
+}

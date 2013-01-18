@@ -16,9 +16,10 @@ import org.jclouds.compute.domain.NodeMetadata
 import org.jclouds.compute.predicates.NodePredicates
 import org.jclouds.util.Preconditions2
 import org.jclouds.compute.domain.internal.NodeMetadataImpl
+import org.jclouds.compute.domain.NodeMetadata
 
-object Application extends Controller {
-  
+object Node extends Controller {
+
   def index = Action {
 
     val provider = "rackspace-cloudservers-uk"
@@ -32,7 +33,23 @@ object Application extends Controller {
     val servers: Array[NodeMetadataImpl]  = compute.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
 
 
-    Ok(views.html.index(servers))
+    Ok(views.html.node.index(servers))
   }
-  
+
+  def view(nodeId: String) = Action {
+
+    val provider = "rackspace-cloudservers-uk"
+    val username = Play.current.configuration.getString("rackspace.username").getOrElse("")
+    val apiKey   = Play.current.configuration.getString("rackspace.apikey").getOrElse("")
+
+    val context = ContextBuilder.newBuilder(provider)
+      .credentials(username, apiKey)
+      .buildView(classOf[ComputeServiceContext])
+    val compute = context.getComputeService()
+    val node: NodeMetadata  = compute.getNodeMetadata(nodeId)
+
+
+    Ok(views.html.node.view(node))
+  }
+
 }
