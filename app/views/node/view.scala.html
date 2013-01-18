@@ -6,9 +6,19 @@
           <dd>@node.getId</dd>
           <dt>Node Name</dt>
           <dd>@node.getName</dd>
-          <dt>Node IP</dt>
+          <dt>Node Public IPs</dt>
           <dd>@node.getPublicAddresses</dd>
+          <dt>Node Private IPs</dt>
+          <dd>@node.getPrivateAddresses</dd>
           <dt>Node Status</dt>
           <dd>@node.getStatus</dd>
+          <dt>Node Location</dt>
+          <dd>@node.getLocation.getParent.getDescription</dd>
+          <dt>Node RAM</dt>
+          <dd>@node.getHardware.getRam</dd>
+          <dt>Node HD Space</dt>
+          <dd>@node.getHardware.getVolumes[0].getSize</dd>
+          <dt>Node CPU</dt>
+          <dd>@node.getHardware.getProcessors</dd>
       </dl>
 }

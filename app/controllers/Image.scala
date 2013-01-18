@@ -18,19 +18,14 @@ import org.jclouds.util.Preconditions2
 import org.jclouds.compute.domain.internal.NodeMetadataImpl
 import org.jclouds.compute.domain.NodeMetadata
 
-object Loadbalancer extends Controller {
+object Image extends Controller {
 
   def index = TODO
 
-  def view(loadBalancerId: String) = TODO
+  def view(imageId: String) = TODO
 
   def create = TODO
 
-  def edit(loadBalancerId: String) = TODO
-
-  def recreate(loadBalancerId: String) = TODO
-
-
-  def delete(loadBalancerId: String) = TODO
+  def delete(imageId: String) = TODO
 
 }

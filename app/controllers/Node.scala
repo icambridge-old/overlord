@@ -58,4 +58,12 @@ object Node extends Controller {
 
   def recreate(nodeId: String) = TODO
 
+  def delete(nodeId: String) = TODO
+
+  def reboot(nodeId: String) = TODO
+
+  def suspend(nodeId: String) = TODO
+
+  def resume(nodeId: String) = TODO
+
 }
