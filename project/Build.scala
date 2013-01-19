@@ -10,8 +10,11 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     "com.google.guava" % "guava" % "12.0",
     "org.jclouds" % "jclouds-compute" % "1.5.5",
+    "org.jclouds" % "jclouds-loadbalancer" % "1.5.5",
     "org.jclouds.provider" % "rackspace-cloudservers-uk" % "1.5.5",
     "org.jclouds.provider" % "rackspace-cloudservers-us" % "1.5.5",
+    "org.jclouds.provider" % "rackspace-cloudloadbalancers-uk" % "1.5.5",
+    "org.jclouds.provider" % "rackspace-cloudloadbalancers-us" % "1.5.5",
     "org.reflections" % "reflections" % "0.9.7.RC1",
     "com.google.code.findbugs" % "jsr305" % "1.3.+"
   )

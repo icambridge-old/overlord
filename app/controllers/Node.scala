@@ -14,6 +14,7 @@ object Node extends Controller {
 
     val client = Compute.getClient
 
+
     val servers: Array[NodeMetadataImpl]  = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
     val flashMessage = flash.get("success").getOrElse("")
 

@@ -15,6 +15,12 @@ import org.jclouds.compute.predicates.NodePredicates
 import org.jclouds.util.Preconditions2
 import org.jclouds.compute.domain.internal.NodeMetadataImpl
 import org.jclouds.openstack.nova.v2_0.extensions._
+
+import  org.jclouds.loadbalancer.LoadBalancerServiceContext
+
+import com.google.common.collect.ImmutableSet
+
+import java.util.Properties;
 import play.api.Play
 
 object Compute {
@@ -30,6 +36,7 @@ object Compute {
     val compute = context.getComputeService()
     compute
   }
+
 
 }
 

@@ -1,0 +1,32 @@
+@(loadBalancers: Array[org.jclouds.loadbalancer.domain.LoadBalancerMetadata], flashMessage: String)
+
+@main("Welcome to Overlord!") {
+
+    @if(flashMessage != "") {
+        <div class="alert alert-success">
+            @flashMessage
+        </div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @loadBalancers.map { loadBalancer =>
+        <tr>
+            <td><a href="@routes.Loadbalancer.view(helper.urlEncode(loadBalancer.getId))">@loadBalancer.getId</a></td>
+            <td>@loadBalancer.getName</td>
+            <td>@loadBalancer.getType</td>
+        </tr>
+
+        }
+        </tbody>
+    </table>
+
+}

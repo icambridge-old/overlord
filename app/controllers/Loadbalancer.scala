@@ -8,19 +8,21 @@ import com.google.common.io.Closeables.closeQuietly
 import java.io.Closeable
 import java.util.Set
 
-import org.jclouds.ContextBuilder
-import org.jclouds.compute.ComputeService
-import org.jclouds.compute.ComputeServiceContext
-import org.jclouds.compute.domain.ComputeMetadata
-import org.jclouds.compute.domain.NodeMetadata
-import org.jclouds.compute.predicates.NodePredicates
-import org.jclouds.util.Preconditions2
-import org.jclouds.compute.domain.internal.NodeMetadataImpl
-import org.jclouds.compute.domain.NodeMetadata
+import org.jclouds.loadbalancer.domain.LoadBalancerMetadata
+
+import util.LoadBalance
 
 object Loadbalancer extends Controller {
 
-  def index = TODO
+  def index = Action { implicit request =>
+
+    val loadBalance = LoadBalance.getLoadBalancer
+
+    val loadBalancers = loadBalance.listLoadBalancers.toArray.map( _.asInstanceOf[LoadBalancerMetadata] )
+    val flashMessage = flash.get("success").getOrElse("")
+
+    Ok(views.html.loadbalancer.index(loadBalancers, flashMessage))
+  }
 
   def view(loadBalancerId: String) = TODO
 
