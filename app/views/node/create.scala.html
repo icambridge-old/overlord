@@ -1,0 +1,27 @@
+@(hardwares: Array[org.jclouds.compute.domain.Hardware], images: Array[org.jclouds.compute.domain.Image])
+
+@main("Create new node") {
+
+      <form method="post" action="@routes.Node.createConfirm">
+          <fieldset>
+              <legend>Create new node</legend>
+              <label>Hardware</label>
+              <select class="span3" name="hardware">
+                  @hardwares.map { hardware =>
+                  <option value="@hardware.getId">@hardware.getName</option>
+                  }
+              </select>
+              <label>Image</label>
+              <select class="span3" name="image">
+                  @images.map { image =>
+                  <option value="@image.getId">@image.getName</option>
+                  }
+              </select>
+
+          </fieldset>
+
+          <fieldset><button type="submit" class="btn btn-primary">Create</button></fieldset>
+      </form>
+
+
+}

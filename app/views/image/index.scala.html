@@ -1,0 +1,30 @@
+@(images: Array[org.jclouds.compute.domain.Image], flashMessage: String)
+
+@main("Welcome to Overlord!") {
+
+    @if(flashMessage != "") {
+        <div class="alert alert-success">
+            @flashMessage
+        </div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @images.map { image =>
+        <tr>
+            <td>@image.getId</td>
+            <td>@image.getDescription</td>
+        </tr>
+
+        }
+        </tbody>
+    </table>
+
+}

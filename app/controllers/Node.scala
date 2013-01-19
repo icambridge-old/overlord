@@ -31,7 +31,39 @@ object Node extends Controller {
     Ok(views.html.node.view(node, flashMessage))
   }
 
-  def create = TODO
+  def create = Action {implicit request =>
+
+
+    val client = Compute.getClient
+    val hardwares = client.listHardwareProfiles.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Hardware])
+    val images = client.listImages.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Image])
+
+    Ok(views.html.node.create(hardwares,images))
+  }
+
+  def createConfirm = Action { implicit request =>
+    val postData = request.body.asFormUrlEncoded.get
+    val emptyValue = Seq("")
+    val imageId = postData.get("image").getOrElse(emptyValue)(0)
+    val hardwareId = postData.get("hardware").getOrElse(emptyValue)(0)
+
+    val client = Compute.getClient
+    val image = client.getImage(imageId)
+    val hardwares = client.listHardwareProfiles.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Hardware])
+    val hardwareIndex = hardwares.indexWhere( hardware => hardware.getId == hardwareId )
+    val hardware = hardwares(hardwareIndex)
+    val location =  client.listAssignableLocations().iterator().next().getId();
+
+    val template = client.templateBuilder()
+      .locationId(location)
+      .fromHardware(hardware)
+      .fromImage(image)
+      .build();
+    client.createNodesInGroup("test", 1, template)
+    println(template.getClass)
+    Redirect(routes.Node.index).flashing("success" -> "The node was successfully created")
+
+  }
 
   def edit(nodeId: String) = TODO
 
@@ -68,8 +100,8 @@ object Node extends Controller {
 
     val client = Compute.getClient
     client.rebootNode(nodeId)
-
-    Redirect(routes.Node.view(nodeId)).flashing("success" -> "The node was successfully rebooted")
+    val encodedNodeId = java.net.URLEncoder.encode(nodeId, "UTF-8")
+    Redirect(routes.Node.view(encodedNodeId)).flashing("success" -> "The node was successfully rebooted")
 
   }
 

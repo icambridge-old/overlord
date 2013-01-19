@@ -1,0 +1,13 @@
+@(node: org.jclouds.compute.domain.NodeMetadata)
+
+@main("Reboot node!") {
+
+    @paritals.nodeMenu(node, "reboot")
+
+    <div class="center">
+        <form method="post" action="@routes.Node.rebootConfirm(helper.urlEncode(node.getId))">
+            <h3>Are you sure you want to reboot this node? There is no cancel for this!</h3>
+            <button class="btn btn-danger btn-large">Yea I am sure</button>
+        </form>
+    </div>
+}

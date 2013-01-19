@@ -15,6 +15,7 @@ POST    /node/reboot/:nodeId/confirm                controllers.Node.rebootConfi
 GET     /node/resume/:nodeId                        controllers.Node.resume(nodeId)
 GET     /node/recreate/:nodeId                      controllers.Node.recreate(nodeId)
 GET     /node/create                                controllers.Node.create
+POST    /node/create/confirm                        controllers.Node.createConfirm
 
 # Load Balancer
 GET     /loadbalancer                               controllers.Loadbalancer.index
