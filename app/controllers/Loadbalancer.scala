@@ -24,7 +24,14 @@ object Loadbalancer extends Controller {
     Ok(views.html.loadbalancer.index(loadBalancers, flashMessage))
   }
 
-  def view(loadBalancerId: String) = TODO
+  def view(loadBalancerId: String) = Action { implicit request =>
+
+    val loadBalance = LoadBalance.getLoadBalancer
+
+    val loadBalancer = loadBalance.getLoadBalancerMetadata(loadBalancerId)
+
+    Ok(views.html.loadbalancer.view(loadBalancer))
+  }
 
   def create = TODO
 
