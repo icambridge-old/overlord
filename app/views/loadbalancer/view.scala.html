@@ -1,4 +1,4 @@
-@(loadBalancer: org.jclouds.loadbalancer.domain.LoadBalancerMetadata)
+@(loadBalancer: org.jclouds.loadbalancer.domain.LoadBalancerMetadata, nodes: Array[org.jclouds.rackspace.cloudloadbalancers.domain.Node])
 
 @main("View Node") {
 
@@ -11,5 +11,13 @@
         <dt>Load Balancer Address</dt>
         <dd>@loadBalancer.getAddresses</dd>
     </dl>
+
+    <h2>Nodes</h2>
+
+    <ul>
+        @nodes.map { node =>
+           <li>@node.getAddress</li>
+        }
+    </ul>
 
 }

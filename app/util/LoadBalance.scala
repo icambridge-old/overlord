@@ -11,6 +11,8 @@ import org.jclouds.util.Preconditions2
 import org.jclouds.openstack.nova.v2_0.extensions._
 
 import  org.jclouds.loadbalancer.LoadBalancerServiceContext
+import org.jclouds.openstack.nova.v2_0.NovaApi;
+import org.jclouds.openstack.nova.v2_0.NovaAsyncApi;
 
 import play.api.Play
 
@@ -23,6 +25,7 @@ object LoadBalance {
     val context = ContextBuilder.newBuilder("cloudloadbalancers-uk")
       .credentials(username, apiKey)
       .buildView(classOf[LoadBalancerServiceContext])
+
 
     val loadBalancer = context.getLoadBalancerService
 
