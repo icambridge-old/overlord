@@ -1,0 +1,11 @@
+@(loadBalancer: org.jclouds.loadbalancer.domain.LoadBalancerMetadata)
+
+@main("Delete Load Balancer!") {
+
+<div class="center">
+    <form method="post" action="@routes.Loadbalancer.deleteConfirm(helper.urlEncode(loadBalancer.getId))">
+        <h3>Are you sure you want to delete this Load Balancer? There is no rollback for this!</h3>
+        <button class="btn btn-danger btn-large">Yea I am sure</button>
+    </form>
+</div>
+}

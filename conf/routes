@@ -18,11 +18,12 @@ GET     /node/create                                controllers.Node.create
 POST    /node/create/confirm                        controllers.Node.createConfirm
 
 # Load Balancer
-GET     /loadbalancer                               controllers.Loadbalancer.index
-GET     /loadbalancer/view/:loadBalancerId          controllers.Loadbalancer.view(loadBalancerId)
-GET     /loadbalancer/edit/:loadBalancerId          controllers.Loadbalancer.edit(loadBalancerId)
-GET     /loadbalancer/recreate/:loadBalancerId      controllers.Loadbalancer.recreate(loadBalancerId)
-GET     /loadbalancer/create                        controllers.Loadbalancer.create
+GET     /loadbalancer                                      controllers.Loadbalancer.index
+GET     /loadbalancer/view/:loadBalancerId                 controllers.Loadbalancer.view(loadBalancerId)
+GET     /loadbalancer/edit/:loadBalancerId                 controllers.Loadbalancer.edit(loadBalancerId)
+GET     /loadbalancer/delete/:loadBalancerId               controllers.Loadbalancer.delete(loadBalancerId)
+POST    /loadbalancer/delete/:loadBalancerId/confirm       controllers.Loadbalancer.deleteConfirm(loadBalancerId)
+GET     /loadbalancer/create                               controllers.Loadbalancer.create
 
 # Images
 
