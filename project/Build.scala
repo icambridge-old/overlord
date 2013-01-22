@@ -16,7 +16,8 @@ object ApplicationBuild extends Build {
     "org.jclouds.provider" % "rackspace-cloudloadbalancers-uk" % "1.5.5",
     "org.jclouds.provider" % "rackspace-cloudloadbalancers-us" % "1.5.5",
     "org.reflections" % "reflections" % "0.9.7.RC1",
-    "com.google.code.findbugs" % "jsr305" % "1.3.+"
+    "com.google.code.findbugs" % "jsr305" % "1.3.+",
+    "mysql" % "mysql-connector-java" % "5.1.18"
   )
 
   val main = PlayProject(appName, appVersion, appDependencies, mainLang = JAVA).settings(
