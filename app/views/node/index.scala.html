@@ -1,4 +1,4 @@
-@(servers: Array[org.jclouds.compute.domain.internal.NodeMetadataImpl], flashMessage: String)
+@(servers: scala.collection.immutable.List[entity.Node], flashMessage: String)
 
 @main("Welcome to Overlord!") {
 
@@ -20,9 +20,9 @@
 
         @servers.map { server =>
         <tr>
-            <td><a href="@routes.Node.view(helper.urlEncode(server.getId))">@server.getId</a></td>
-            <td>@server.getName</td>
-            <td>@server.getStatus</td>
+            <td><a href="@routes.Node.view(helper.urlEncode(server.id))">@server.id</a></td>
+            <td>@server.name</td>
+            <td>@server.status</td>
         </tr>
 
         }

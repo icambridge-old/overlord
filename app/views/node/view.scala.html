@@ -1,4 +1,4 @@
-@(node: org.jclouds.compute.domain.NodeMetadata, flashMessage: String)
+@(node: entity.Node, flashMessage: String)
 
 @main("View Node") {
     @paritals.nodeMenu(node, "view")
@@ -11,18 +11,18 @@
 
     <dl class="dl-horizontal">
         <dt>Node ID</dt>
-        <dd>@node.getId</dd>
+        <dd>@node.id</dd>
         <dt>Node Name</dt>
-        <dd>@node.getName</dd>
+        <dd>@node.name</dd>
         <dt>Node Public IPs</dt>
-        <dd>@node.getPublicAddresses</dd>
+        <dd>@node.publicIps</dd>
         <dt>Node Private IPs</dt>
-        <dd>@node.getPrivateAddresses</dd>
+        <dd>@node.privateIps</dd>
         <dt>Node Status</dt>
-        <dd>@node.getStatus</dd>
+        <dd>@node.status</dd>
         <dt>Node Location</dt>
-        <dd>@node.getLocation.getParent.getDescription</dd>
+        <dd>@node.location</dd>
         <dt>Node Type</dt>
-        <dd>@node.getHardware.getName</dd>
+        <dd>@node.hardware</dd>
     </dl>
 }

@@ -7,15 +7,13 @@ import org.jclouds.compute.domain.internal.NodeMetadataImpl
 import org.jclouds.compute.domain.NodeMetadata
 
 import util.Compute
+import models.Nodes
 
 object Node extends Controller {
 
   def index = Action { implicit request =>
 
-    val client = Compute.getClient
-
-
-    val servers: Array[NodeMetadataImpl]  = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
+    val servers = Nodes.getAll
     val flashMessage = flash.get("success").getOrElse("")
 
     Ok(views.html.node.index(servers, flashMessage))
@@ -25,7 +23,7 @@ object Node extends Controller {
 
 
     val client = Compute.getClient
-    val node: NodeMetadata  = client.getNodeMetadata(nodeId)
+    val node = Nodes.getOne(nodeId)
 
     val flashMessage = flash.get("success").getOrElse("")
 
@@ -73,7 +71,7 @@ object Node extends Controller {
   def delete(nodeId: String) = Action { implicit request =>
 
     val client = Compute.getClient
-    val node: NodeMetadata  = client.getNodeMetadata(nodeId)
+    val node = Nodes.getOne(nodeId)
 
     Ok(views.html.node.delete(node))
 
@@ -91,7 +89,7 @@ object Node extends Controller {
   def reboot(nodeId: String) = Action {  implicit request =>
 
     val client = Compute.getClient
-    val node: NodeMetadata  = client.getNodeMetadata(nodeId)
+    val node = Nodes.getOne(nodeId)
 
     Ok(views.html.node.reboot(node))
 

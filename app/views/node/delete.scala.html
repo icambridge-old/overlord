@@ -1,11 +1,11 @@
-@(node: org.jclouds.compute.domain.NodeMetadata)
+@(node: entity.Node)
 
 @main("Delete node!") {
 
     @paritals.nodeMenu(node, "delete")
 
     <div class="center">
-        <form method="post" action="@routes.Node.deleteConfirm(helper.urlEncode(node.getId))">
+        <form method="post" action="@routes.Node.deleteConfirm(helper.urlEncode(node.id))">
             <h3>Are you sure you want to delete this node? There is no rollback for this!</h3>
             <button class="btn btn-danger btn-large">Yea I am sure</button>
         </form>
