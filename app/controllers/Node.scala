@@ -1,19 +1,20 @@
 package controllers
 
-import _root_.util.factory.actors.Servers
 import play.libs.Akka._
 
 import play.api._
 import play.api.libs.concurrent._
 import play.api.mvc._
+import play.libs.Akka
+import akka.actor.Props
 
 import org.jclouds.compute.domain.internal.NodeMetadataImpl
 import org.jclouds.compute.domain.NodeMetadata
 
-import util.Compute
+import utils.Compute
+import utils.NodeActors
 import models.Nodes
-import play.libs.Akka
-import akka.actor.Props
+import entity.Template
 
 object Node extends Controller {
 
@@ -53,21 +54,12 @@ object Node extends Controller {
     val imageId = postData.get("image").getOrElse(emptyValue)(0)
     val hardwareId = postData.get("hardware").getOrElse(emptyValue)(0)
 
-    val client = Compute.getClient
-    val image = client.getImage(imageId)
-    val hardwares = client.listHardwareProfiles.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Hardware])
-    val hardwareIndex = hardwares.indexWhere( hardware => hardware.getId == hardwareId )
-    val hardware = hardwares(hardwareIndex)
-    val location =  client.listAssignableLocations().iterator().next().getId();
+    val template = new Template(imageId, hardwareId, "new")
 
-    val template = client.templateBuilder()
-      .locationId(location)
-      .fromHardware(hardware)
-      .fromImage(image)
-      .build();
-    client.createNodesInGroup("test", 1, template)
-    println(template.getClass)
-    Redirect(routes.Node.index).flashing("success" -> "The node was successfully created")
+    NodeActors.create ! template
+    NodeActors.list ! "run"
+
+    Redirect(routes.Node.index).flashing("success" -> "The node will be created")
 
   }
 
@@ -88,8 +80,9 @@ object Node extends Controller {
 
     val client = Compute.getClient
     client.destroyNode(nodeId)
+    NodeActors.list ! "run"
 
-    Redirect(routes.Node.index).flashing("success" -> "The node was successfully deleted")
+    Redirect(routes.Node.index).flashing("success" -> "The node will be deleted")
 
   }
 

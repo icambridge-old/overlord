@@ -1,6 +1,6 @@
 package actors
 
-import util.Compute
+import utils.Compute
 import models.Nodes
 
 import akka.actor._
@@ -13,16 +13,15 @@ import org.jclouds.compute.domain.NodeMetadata
 
 import anorm._
 
-class Servers extends Actor {
+class ListNodes extends Actor {
   def receive = {
     case "run" => {
 
       val client = Compute.getClient
-
+      val nodes: Array[NodeMetadataImpl] = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
       Nodes.truncate
       Logger.info("Node table successfully truncated")
 
-      val nodes: Array[NodeMetadataImpl] = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
       nodes.map { node =>
          val nodeName = node.getName
          val date = new java.util.Date

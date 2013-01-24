@@ -18,7 +18,7 @@ import org.jclouds.rackspace.cloudloadbalancers.domain.internal.BaseNode._
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 
-import util.LoadBalance
+import utils.LoadBalance
 
 object Loadbalancer extends Controller {
 
