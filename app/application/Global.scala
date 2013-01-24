@@ -6,15 +6,14 @@ import akka.actor._
 import scala.concurrent.duration._
 
 import play.api._
-import play.api.libs.json._
-import play.api.libs.iteratee._
+import play.api.Play.current
 import play.api.libs.concurrent._
 
 import akka.util.Timeout
 import akka.pattern.ask
 
-import play.api.Play.current
 import play.api.libs.concurrent.Execution.Implicits._
+import util.factory.actors.Servers
 
 object Global extends GlobalSettings {
 
@@ -22,11 +21,11 @@ object Global extends GlobalSettings {
     println("Application has started")
 
 
-    val serverActor = Akka.system.actorOf(Props[actors.Servers])
+
     Akka.system.scheduler.schedule(
       0 seconds,
       5 minutes,
-      serverActor,
+      Servers.actor,
       "run"
     )
   }
