@@ -15,20 +15,24 @@ import anorm._
 
 class ListNodes extends Actor {
   def receive = {
-    case "run" => {
+    case "run" => execute
+    case "delayed" => {
+      Thread.sleep(2000)
+      execute
+    }
+  }
 
-      val client = Compute.getClient
-      val nodes: Array[NodeMetadataImpl] = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
-      Nodes.truncate
-      Logger.info("Node table successfully truncated")
+  def execute = {
+    val client = Compute.getClient
+    val nodes: Array[NodeMetadataImpl] = client.listNodes().toArray.map(_.asInstanceOf[NodeMetadataImpl])
+    Nodes.truncate
+    Logger.info("Node table successfully truncated")
 
-      nodes.map { node =>
-         val nodeName = node.getName
-         val date = new java.util.Date
-         Nodes.insert(node)
-          Logger.info("Node " + nodeName + " successfully inserted into database")
-      }
-
+    nodes.map { node =>
+      val nodeName = node.getName
+      val date = new java.util.Date
+      Nodes.insert(node)
+      Logger.info("Node " + nodeName + " successfully inserted into database")
     }
   }
 }

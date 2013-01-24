@@ -26,10 +26,18 @@ POST    /loadbalancer/delete/:loadBalancerId/confirm       controllers.Loadbalan
 GET     /loadbalancer/create                               controllers.Loadbalancer.create
 
 # Images
-
 GET     /image                        controllers.Image.index
 GET     /image/create                 controllers.Image.create
 GET     /image/view/:imageId          controllers.Image.view(imageId)
+
+#Groups
+
+GET    /group                        controllers.Group.index
+GET    /group/create                 controllers.Group.create
+POST   /group/create/confirm         controllers.Group.createConfirm
+GET    /group/edit/:groupId          controllers.Group.edit(groupId)
+GET    /group/view/:groupId          controllers.Group.view(groupId)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

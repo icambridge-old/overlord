@@ -11,6 +11,7 @@ class CreateNode extends Actor {
   def receive = {
     case Template(imageId, hardwareId, group) => {
 
+      Logger.info("Starting node creation")
       val client = Compute.getClient
       val image = client.getImage(imageId)
       val hardwares = client.listHardwareProfiles.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Hardware])

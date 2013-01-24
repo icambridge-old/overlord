@@ -37,9 +37,8 @@ object Node extends Controller {
 
     Ok(views.html.node.view(node, flashMessage))
   }
-
+  // TODO use groups and group templates
   def create = Action {implicit request =>
-
 
     val client = Compute.getClient
     val hardwares = client.listHardwareProfiles.toArray.map(_.asInstanceOf[org.jclouds.compute.domain.Hardware])
@@ -57,7 +56,7 @@ object Node extends Controller {
     val template = new Template(imageId, hardwareId, "new")
 
     NodeActors.create ! template
-    NodeActors.list ! "run"
+    NodeActors.list ! "delayed"
 
     Redirect(routes.Node.index).flashing("success" -> "The node will be created")
 
