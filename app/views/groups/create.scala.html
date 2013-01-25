@@ -1,0 +1,23 @@
+@(form: play.api.data.Form[entity.Group], loadbalancers: Seq[(String, String)], images:  Seq[(String, String)], hardwares: Seq[(String, String)])
+@import helper.twitterBootstrap._
+
+@main("Create Group") {
+
+    @helper.form(action = routes.Group.createConfirm) {
+
+
+        <input type="hidden" value="@form("id").value" name="id" />
+
+        @helper.inputText(form("name"), args = 'size -> 75, 'placeholder -> "title")
+
+        @helper.select(form("loadBalancerId"), options = loadbalancers)
+
+        @helper.select(form("imageId"), options = images)
+
+        @helper.select(form("hardwareId"), options = hardwares)
+
+        <button type="submit" class="btn btn-primary">Save</button>
+
+    }
+
+}
