@@ -1,0 +1,25 @@
+@(groups: scala.collection.immutable.List[entity.Group])
+
+@main("Welcome to Overlord!") {
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    @groups.map { group =>
+    <tr>
+        <td><a href="@routes.Group.view(helper.urlEncode(group.id.get.toString))">@group.id</a></td>
+        <td>@group.name</td>
+    </tr>
+
+    }
+    </tbody>
+</table>
+
+}

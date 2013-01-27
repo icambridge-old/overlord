@@ -43,7 +43,11 @@ object Group extends Controller {
     (hardware.getId,hardware.getName)
   }).toSeq
 
-  def index = TODO
+  def index = Action { implicit request =>
+
+    val groups = model.getAll
+    Ok(views.html.groups.index(groups))
+  }
 
   def create = Action { implicit request =>
 
